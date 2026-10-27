@@ -85,12 +85,54 @@ Marca guarda-chuva na imprensa: **Ancre Health Group**. Slogan comum: "faz bem p
 
 ---
 
-## 5. O que ainda falta (só a Fer tem)
+## 5. O ecossistema em números (Salesforce + dashboards, 27/10/2026)
 
-- Faturamento, meta e ticket médio de cada negócio.
-- Número de pacientes/mês e de membros da Gym; capacidade; churn.
-- Origem dos clientes hoje (indicação, Google, Instagram, convênio, tráfego pago).
-- Verba de mídia atual e quem opera (Stoot? interno?).
-- CRM: onde caem os leads do formulário da Gym e do WhatsApp da clínica.
+Decisão da Fer: **Ancre é um ecossistema só**, não dois negócios. Fontes: org Salesforce (Health Cloud), artefatos "Crescimento Ancre 2026", "Ocupação e valor das salas" e "Visão do Investidor".
+
+### Clínica (jan–set/2026)
+| Indicador | Valor |
+|---|---|
+| Faturamento de consultas | R$ 2,86 mi (média R$ 318 mil/mês; set foi recorde, R$ 347 mil) |
+| Anualizado | ~R$ 3,8 mi |
+| Consultas realizadas | 4.695 (590 em set) · ticket médio R$ 609 |
+| Pacientes distintos com atendimento em 2026 | 2.077 |
+| Profissionais ativos | 23 (25 passaram no ano) |
+| Concentração | Julia Trindade 27% + Mariana Bratz 15% = 42% do faturamento; top 8 = 76% |
+| Cancelamentos | 25,8% dos agendamentos (1.632 em 9 meses), crescendo: 237 em set |
+| Ocupação das 7 salas | 32% (598 de 1.848 h/mês). Pico qua 14–16h; seg e sex quase vazias |
+| Conversão por conversa (WhatsApp) | 50,6% em agosto; primeiras consultas +40% jul→ago |
+| Custo da plataforma | ~R$ 30 mil/mês de Salesforce |
+| Origem do lead | **não rastreada**: 8.651 oportunidades sem LeadSource |
+
+### Ancre Gym (out/2025–out/2026)
+| Indicador | Valor |
+|---|---|
+| Alunos que já pagaram algo | 142 (503 oportunidades ganhas) |
+| Planos vigentes hoje | **38 alunos** com plano ativo (R$ 202 mil contratados) |
+| Mensalidades | 37 alunos em set, 28 em out (parcial) |
+| Capacidade | 100 alunos/mês → **ocupação ~40%** |
+| Receita 2026 até out | R$ 671 mil: planos R$ 332 mil + mensalidades R$ 312 mil + checkups R$ 27,5 mil ≈ R$ 67 mil/mês (set: R$ 77 mil) |
+| Mix de planos | Semestral domina (R$ 5.100–8.100); trimestral R$ 2.600–4.500; mensal R$ 500–1.500; anual R$ 9.600 |
+| Checkup avulso | ~R$ 350. **15–17/mês em jan–mar → 1–2/mês em ago–out.** A porta de entrada secou |
+| Churn (campo de status, recente) | 23 contas ativas · 12 inativas · 1 pausa · 1 cancelado · 36 sem status |
+| Origem da venda (71 de 142 preenchidos) | Tráfego pago 34 · Indicação Ancre 15 · Profissional Ancre 13 · Indicação externa 9 |
+
+### A alavanca do ecossistema
+- **Só 32 dos 142 alunos da Gym (23%) são pacientes da clínica.**
+- **Só 32 dos 2.077 pacientes de 2026 (1,5%) treinam na Gym.**
+- A Gym precisa de ~60 alunos para lotar. A clínica tem 2.045 pacientes que nunca pisaram lá, atendidos por 23 profissionais que já falam de exercício (cardio, reumato, endócrino, psiquiatria, nutrição).
+- Quando a origem é registrada, 39% das vendas da Gym vêm de dentro da Ancre. Esse canal custa zero e está subusado.
+
+### Leitura
+1. O problema da Gym não é marketing externo; é **encaminhamento interno**. Protocolo de prescrição de exercício pelos médicos + Checkup como pedido médico.
+2. O Checkup caiu de 17 para 1 por mês. Era o funil; precisa voltar como produto com preço, agendamento e campanha própria.
+3. A clínica tem 68% das salas vazias e 26% de cancelamento: capacidade sobrando. Crescer a clínica é ocupar segunda e sexta e reduzir cancelamento, não abrir sala.
+4. Nada mede origem. Antes de gastar em mídia, ligar LeadSource no WhatsApp e no formulário, e preencher Origem_Venda_Gym na venda.
+
+## 6. O que ainda falta (só a Fer tem)
+
+- Meta de faturamento e de alunos para 2027.
+- Verba de mídia atual (Meta Ads já tem credencial no Salesforce) e quem opera.
+- Preço de tabela dos planos e do Checkup, e a lógica do membership "limitado".
 - O que já foi tentado e não funcionou.
-- Prioridade: crescer a Gym até lotar o membership, ou escalar a clínica, ou os dois?
+- Como o encaminhamento clínica → Gym acontece hoje, se acontece.
