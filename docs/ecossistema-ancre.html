@@ -1,0 +1,376 @@
+<title>Ecossistema Ancre</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: documento estratégico em uma coluna de leitura; barra fixa separa Conceito (0–3) de Desdobramento (4–6). Mapa em SVG, tabelas largas rolam dentro de si. */
+:root{
+  --bg:#F5F6F9; --paper:#FFFFFF; --ink:#131C33; --ink2:#4B5670; --ink3:#7C869E; --hair:#DEE2EB; --soft:#ECEFF5;
+  --navy:#163769; --navy-soft:#E3E9F4; --coral:#D96A5A; --coral-soft:#F9E7E3;
+  --ok:#2E7D5B; --ok-soft:#DFF1E8; --warn:#A8690F; --warn-soft:#F7ECD5; --plan:#5A6478; --plan-soft:#E9ECF2;
+  --display:"Bricolage Grotesque","Instrument Sans",system-ui,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1424; --paper:#161D30; --ink:#E9ECF4; --ink2:#AEB6CA; --ink3:#7F89A3; --hair:#2A3350; --soft:#1D2540;
+  --navy:#8FB0E6; --navy-soft:#1C2A48; --coral:#F08A78; --coral-soft:#3A2420;
+  --ok:#7FD0A8; --ok-soft:#1C3A2D; --warn:#E5B35E; --warn-soft:#3B2E14; --plan:#A9B2C6; --plan-soft:#242C44; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1424; --paper:#161D30; --ink:#E9ECF4; --ink2:#AEB6CA; --ink3:#7F89A3; --hair:#2A3350; --soft:#1D2540;
+  --navy:#8FB0E6; --navy-soft:#1C2A48; --coral:#F08A78; --coral-soft:#3A2420;
+  --ok:#7FD0A8; --ok-soft:#1C3A2D; --warn:#E5B35E; --warn-soft:#3B2E14; --plan:#A9B2C6; --plan-soft:#242C44; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1080px;margin:0 auto;padding-block:32px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;margin:0;text-wrap:balance;line-height:1.15}
+h1{font-size:clamp(34px,5vw,54px);letter-spacing:-.02em;font-weight:700}
+h2{font-size:28px;letter-spacing:-.01em;margin-top:8px}
+h3{font-size:18px;margin-top:4px}
+h4{font-size:15px}
+p{margin:0;max-width:68ch}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.lede{font-size:19px;color:var(--ink2);max-width:60ch}
+.q{font-family:var(--display);font-size:clamp(22px,3vw,30px);font-weight:500;line-height:1.3;color:var(--navy);max-width:30ch;text-wrap:balance}
+nav.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--hair);margin:28px 0 0;padding:10px 0;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+nav.bar .g{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+nav.bar .gl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-right:4px}
+nav.bar a{font-size:13px;text-decoration:none;color:var(--ink2);padding:4px 10px;border-radius:999px;border:1px solid var(--hair);background:var(--paper)}
+nav.bar a:hover,nav.bar a:focus-visible{color:var(--ink);border-color:var(--navy);outline:none}
+section{padding-top:56px;scroll-margin-top:72px;display:grid;gap:20px}
+section.part{border-top:3px solid var(--navy);margin-top:40px;padding-top:28px}
+section.part .eyebrow{color:var(--navy)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.card{background:var(--paper);border:1px solid var(--hair);border-radius:12px;padding:18px 20px;display:grid;gap:8px;min-width:0}
+.card.navy{border-left:4px solid var(--navy)}
+.card.coral{border-left:4px solid var(--coral)}
+.card .k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.card .big{font-family:var(--display);font-size:30px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.1}
+.card .s{color:var(--ink2);font-size:14px}
+.chip{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap;vertical-align:middle}
+.c-ok{background:var(--ok-soft);color:var(--ok)}.c-warn{background:var(--warn-soft);color:var(--warn)}.c-plan{background:var(--plan-soft);color:var(--plan);border:1px dashed var(--plan)}.c-nav{background:var(--navy-soft);color:var(--navy)}.c-cor{background:var(--coral-soft);color:var(--coral)}
+.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--ink2);align-items:center}
+.tw{overflow-x:auto;background:var(--paper);border:1px solid var(--hair);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:720px}
+th{text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3);font-weight:500;padding:11px 14px;border-bottom:1px solid var(--hair);background:var(--soft);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--hair);vertical-align:top;min-width:0}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600;color:var(--ink)}
+td.m{font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+td .s{display:block;color:var(--ink3);font-size:12.5px;font-weight:400;margin-top:2px}
+.note{background:var(--navy-soft);border-radius:12px;padding:16px 20px;max-width:76ch}
+.note.c{background:var(--coral-soft)}
+.note b{color:var(--navy)}.note.c b{color:var(--coral)}
+ul,ol{margin:0;padding-left:20px;max-width:70ch}li{margin:5px 0}
+ol.steps{list-style:none;padding:0;display:grid;gap:10px;counter-reset:s}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;background:var(--paper);border:1px solid var(--hair);border-radius:12px;padding:14px 16px;max-width:none}
+ol.steps li::before{content:counter(s);width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-family:var(--mono);font-size:12px;font-weight:500}
+ol.steps b{font-family:var(--display);font-weight:600;font-size:16px;display:block;margin-bottom:2px}
+.map{background:var(--paper);border:1px solid var(--hair);border-radius:14px;padding:12px;overflow-x:auto}
+.map svg{display:block;width:100%;min-width:640px;height:auto}
+.voice{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.voice .card p{font-size:14px}
+.jour{display:grid;gap:10px}
+.jour .row{display:grid;grid-template-columns:150px repeat(5,minmax(0,1fr));gap:6px;align-items:stretch}
+.jour .row>div{background:var(--paper);border:1px solid var(--hair);border-radius:10px;padding:10px 12px;font-size:13px;min-width:0}
+.jour .row>div:first-child{background:var(--navy-soft);border-color:transparent;font-weight:600;font-family:var(--display)}
+.jour .row.head>div{background:transparent;border:0;padding:0 12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3)}
+.jour .gap{border-color:var(--coral)!important;border-style:dashed!important}
+.jour .row>div small{display:block;color:var(--ink3);font-size:11.5px;margin-top:4px}
+.jourwrap{overflow-x:auto}.jourwrap .jour{min-width:900px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.kpi{background:var(--paper);border:1px solid var(--hair);border-radius:12px;padding:12px 14px;display:grid;gap:4px}
+.kpi .k{font-size:12px;color:var(--ink3)}
+.kpi .v{font-family:var(--display);font-size:24px;font-weight:600;font-variant-numeric:tabular-nums}
+.kpi .src{font-family:var(--mono);font-size:10.5px;color:var(--ink3)}
+footer{margin-top:64px;padding-top:16px;border-top:1px solid var(--hair);font-family:var(--mono);font-size:12px;color:var(--ink3);display:grid;gap:4px}
+@media (max-width:640px){h2{font-size:24px}.lede{font-size:17px}}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+
+<div class="wrap">
+<header style="display:grid;gap:14px">
+  <span class="eyebrow">Ancre Health Group · Florianópolis · estratégia v1 · 27/10/2026</span>
+  <h1>Ecossistema Ancre</h1>
+  <p class="lede">Uma pessoa, uma saúde, várias portas. Como marca, cuidado, experiência, tecnologia e crescimento funcionam juntos, e o que fazer nos próximos 90 dias.</p>
+  <p class="q">“Você está cuidando da sua saúde. Mas está preparando seu corpo para a vida que deseja viver?”</p>
+</header>
+
+<nav class="bar" aria-label="Seções">
+  <span class="g"><span class="gl">Conceito</span><a href="#tese">0 · Tese</a><a href="#mapa">1 · Mapa</a><a href="#posicionamento">2 · Posicionamento</a><a href="#jornadas">3 · Jornadas</a></span>
+  <span class="g"><span class="gl">Desdobramento</span><a href="#presenca">4 · Presença</a><a href="#plano">5 · 90 dias</a><a href="#painel">6 · Painel</a><a href="#decisoes">Decisões</a></span>
+</nav>
+
+<div class="note" style="margin-top:22px"><b>Como ler.</b> As seções 0 a 3 são o conceito: o que a Ancre é, para quem, e como as frentes se conectam na vida de uma pessoa. Decidem-se uma vez. As seções 4 a 6 são o desdobramento: o que muda nos canais, o que fazer em 90 dias e como acompanhar. Mudam a cada ciclo. Os números vêm do Salesforce e dos painéis já existentes; o que falta medir está marcado.</div>
+
+<!-- ═══════════════════ CONCEITO ═══════════════════ -->
+<section id="tese" class="part">
+  <span class="eyebrow">0 · Tese</span>
+  <h2>A Ancre cuida da mesma pessoa em fases diferentes da vida</h2>
+  <p>A mente que pede ajuda. O filho que precisa de um olhar. O corpo que precisa acompanhar o que a pessoa quer viver. O tratamento quando o convencional não bastou. E o pertencimento que mantém tudo isso de pé. Hoje essas cinco coisas existem no mesmo prédio, no mesmo Salesforce e com os mesmos sócios. O que falta é a pessoa perceber.</p>
+  <div class="cols">
+    <div class="card navy"><span class="k">O que já é verdade</span><p>23 profissionais, uma academia, uma clínica infantil, 2.077 pacientes atendidos em 2026, um prontuário e um CRM únicos. Um ecossistema operacional.</p></div>
+    <div class="card coral"><span class="k">O que ainda é promessa</span><p>Só 32 dos 142 alunos da Gym são pacientes da clínica. Só 1,5% dos pacientes treinam. Cada frente tem o próprio Instagram, WhatsApp e narrativa. A pessoa entra por uma porta e nunca vê as outras.</p></div>
+  </div>
+  <h3>Três decisões que o conceito pede</h3>
+  <ol class="steps">
+    <li><b>A marca é Ancre. As frentes são portas, e não empresas.</b>Clínica, Kids, Gym, Essencial e Comunidade falam a mesma língua e apontam uma para a outra. Cada uma tem função clara na vida da pessoa; nenhuma se apresenta sozinha.</li>
+    <li><b>O produto é a continuidade. Consulta, aula e procedimento são episódios dentro dela.</b>O que a Ancre vende é acompanhar uma pessoa ao longo do tempo, com dado e com gente. É isso que a imprensa já chamou de Healthness e que ninguém mais em Florianópolis consegue dizer com verdade.</li>
+    <li><b>A conexão entre portas é prescrita, e não vendida.</b>Quem indica o Checkup é o médico, com a avaliação na mão. Quem sugere a clínica é o treinador, quando o corpo mostra algo. O marketing abre a porta; o profissional decide se a pessoa passa. Isso protege a confiança e é o que diferencia a Ancre de um pacote de serviços.</li>
+  </ol>
+  <div class="note c"><b>O que o conceito muda no marketing.</b> Deixa de existir "marketing da Gym" e "marketing da clínica". Existe o marketing de uma jornada, com portas de entrada diferentes e um indicador comum: quantas pessoas a Ancre acompanha, por quanto tempo e em quantas frentes.</div>
+</section>
+
+<section id="mapa">
+  <span class="eyebrow">1 · Mapa do ecossistema</span>
+  <h2>Frentes, ofertas, públicos e estágio de cada iniciativa</h2>
+  <div class="legend"><span class="chip c-ok">funciona</span><span class="chip c-warn">estruturando</span><span class="chip c-plan">projeto</span><span>· o estágio vem do que está no Salesforce, no site e no brief da Fer</span></div>
+  <div class="map" role="img" aria-label="Mapa do ecossistema: a pessoa no centro, as cinco portas ao redor, a camada Ancre OS por baixo">
+    <svg viewBox="0 0 960 520" xmlns="http://www.w3.org/2000/svg" font-family="Instrument Sans, system-ui, sans-serif">
+      <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink3)"/></marker></defs>
+      <!-- camada OS -->
+      <rect x="40" y="430" width="880" height="64" rx="14" fill="var(--soft)" stroke="var(--hair)"/>
+      <text x="64" y="456" font-size="12" font-family="JetBrains Mono, monospace" fill="var(--ink3)" letter-spacing="1">ANCRE OS · SALESFORCE</text>
+      <text x="64" y="478" font-size="13" fill="var(--ink2)">Health Cloud + prontuário com IA · Scheduler · WhatsApp com Agentforce · Marketing Cloud · Slack</text>
+      <text x="640" y="456" font-size="12" font-family="JetBrains Mono, monospace" fill="var(--warn)" letter-spacing="1">SEM USO / PLANEJADO</text>
+      <text x="640" y="478" font-size="13" fill="var(--ink2)">Data Cloud · Mywellness manual · portal do paciente · Tableau</text>
+      <!-- conexões -->
+      <g stroke="var(--hair)" stroke-width="2" fill="none">
+        <line x1="480" y1="230" x2="480" y2="92"/><line x1="480" y1="230" x2="214" y2="150"/><line x1="480" y1="230" x2="746" y2="150"/>
+        <line x1="480" y1="230" x2="214" y2="330"/><line x1="480" y1="230" x2="746" y2="330"/>
+      </g>
+      <!-- setas prescritas -->
+      <g stroke="var(--coral)" stroke-width="2" fill="none" stroke-dasharray="5 4" marker-end="url(#arr)">
+        <path d="M296,150 C380,120 580,120 664,150"/>
+        <path d="M296,330 C380,360 580,360 664,330"/>
+      </g>
+      <text x="480" y="128" text-anchor="middle" font-size="11.5" fill="var(--coral)">médico pede o Checkup</text>
+      <text x="480" y="372" text-anchor="middle" font-size="11.5" fill="var(--coral)">treinador percebe, clínica avalia</text>
+      <!-- centro -->
+      <circle cx="480" cy="230" r="58" fill="var(--navy)"/>
+      <text x="480" y="224" text-anchor="middle" font-size="15" font-weight="600" fill="#fff">a pessoa</text>
+      <text x="480" y="244" text-anchor="middle" font-size="11.5" fill="#fff" opacity=".85">corpo · mente · hábitos · fases</text>
+      <!-- nós -->
+      <g font-size="14" font-weight="600" fill="var(--ink)">
+        <rect x="398" y="36" width="164" height="56" rx="12" fill="var(--paper)" stroke="var(--ok)" stroke-width="2"/><text x="480" y="60" text-anchor="middle">Clínica Ancre</text><text x="480" y="80" text-anchor="middle" font-size="11.5" font-weight="400" fill="var(--ink2)">23 profissionais · R$ 318 mil/mês</text>
+        <rect x="132" y="122" width="164" height="56" rx="12" fill="var(--paper)" stroke="var(--ok)" stroke-width="2"/><text x="214" y="146" text-anchor="middle">Ancre Gym</text><text x="214" y="166" text-anchor="middle" font-size="11.5" font-weight="400" fill="var(--ink2)">46–48 alunos · meta 50</text>
+        <rect x="664" y="122" width="164" height="56" rx="12" fill="var(--paper)" stroke="var(--ok)" stroke-width="2"/><text x="746" y="146" text-anchor="middle">Ancre Kids</text><text x="746" y="166" text-anchor="middle" font-size="11.5" font-weight="400" fill="var(--ink2)">desde 2024 · pouco visível</text>
+        <rect x="132" y="302" width="164" height="56" rx="12" fill="var(--paper)" stroke="var(--warn)" stroke-width="2"/><text x="214" y="326" text-anchor="middle">Ancre Essencial</text><text x="214" y="346" text-anchor="middle" font-size="11.5" font-weight="400" fill="var(--ink2)">escetamina · injetáveis</text>
+        <rect x="664" y="302" width="164" height="56" rx="12" fill="var(--paper)" stroke="var(--plan)" stroke-width="2" stroke-dasharray="6 4"/><text x="746" y="326" text-anchor="middle">Comunidade Ancre</text><text x="746" y="346" text-anchor="middle" font-size="11.5" font-weight="400" fill="var(--ink2)">encontros · pertencimento</text>
+      </g>
+      <!-- checkup -->
+      <rect x="40" y="206" width="120" height="44" rx="22" fill="var(--coral-soft)" stroke="var(--coral)"/><text x="100" y="226" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--coral)">Checkup</text><text x="100" y="241" text-anchor="middle" font-size="10.5" fill="var(--coral)">porta de entrada</text>
+      <line x1="160" y1="228" x2="214" y2="178" stroke="var(--coral)" stroke-width="1.5"/>
+    </svg>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th>Frente</th><th>Função na vida da pessoa</th><th>Oferta hoje</th><th>Estágio</th><th>Números</th><th>Porta de entrada</th></tr></thead>
+    <tbody>
+      <tr><td>Clínica Ancre<span class="s">desde 2018</span></td><td>Quando algo na mente, no corpo ou nos hábitos não vai bem e a pessoa precisa de diagnóstico e acompanhamento</td><td>Psiquiatria, psicologia, neurologia, nutrição, reumato, endócrino, cardio, clínico, neuropsico. Consulta R$ 480–900</td><td><span class="chip c-ok">funciona</span></td><td>R$ 2,86 mi jan–set · 590 consultas/mês · 2.077 pacientes · 32% das salas ocupadas · 26% de cancelamento</td><td>Google (especialidade + Floripa), Instagram, indicação, convênio por reembolso</td></tr>
+      <tr><td>Ancre Kids<span class="s">desde 2024</span></td><td>Quando o filho precisa de um olhar: desenvolvimento, comportamento, família</td><td>Psiquiatria e psicologia da infância, neuropediatria, nutrição infantil</td><td><span class="chip c-ok">funciona</span> <span class="chip c-warn">invisível</span></td><td>186 seguidores no Instagram · sem site · sem separação no Salesforce (a apurar)</td><td>Indicação de escola e pediatra, pais que já são pacientes</td></tr>
+      <tr><td>Ancre Gym<span class="s">desde dez/2025</span></td><td>Quando o corpo precisa acompanhar a vida que a pessoa quer viver, com alguém olhando</td><td>Treino com horário marcado, 1 professor para 2 alunos, Technogym. Plano 8 aulas R$ 960–1.020; semestral R$ 5.100–8.100</td><td><span class="chip c-ok">funciona</span> <span class="chip c-warn">crescendo</span></td><td>46–48 ativos · meta 50 · capacidade ~100 · R$ 67 mil/mês · Google 5,0 (54)</td><td>Tráfego pago, indicação, Checkup</td></tr>
+      <tr><td>Checkup<span class="s">produto da Gym</span></td><td>Tornar concreta a pergunta: o corpo acompanha o que você quer fazer?</td><td>Avaliação Technogym, 40 indicadores, Wellness Age. ~R$ 350</td><td><span class="chip c-warn">reestruturar</span></td><td>15–17/mês em jan–mar → 1–2/mês desde agosto</td><td>Hoje: WhatsApp. Proposto: pedido do médico + página própria</td></tr>
+      <tr><td>Ancre Essencial<span class="s">procedimentos</span></td><td>Quando o tratamento convencional não bastou e há indicação de procedimento</td><td>Escetamina para depressão resistente (já no site), injetáveis conforme indicação</td><td><span class="chip c-warn">estruturando</span></td><td>Sem registro separado no Salesforce (tipo "Procedimento" existe, uso a apurar)</td><td>Só por indicação profissional. Publicidade médica restrita pelo CFM</td></tr>
+      <tr><td>Comunidade Ancre</td><td>Pertencer: encontros, movimento, interesses em comum, ao longo do tempo</td><td>Não existe como oferta. Há sementes: alunos que se conhecem, eventos pontuais, playlist no Spotify</td><td><span class="chip c-plan">projeto</span></td><td>—</td><td>Começa por quem já é da casa</td></tr>
+      <tr><td>Expansão da Gym</td><td>Mais integração entre treino, avaliação, recuperação e acompanhamento</td><td>Ideias: avaliação multidisciplinar, recovery, massagem, dados de wearables, clube de membros</td><td><span class="chip c-plan">projeto</span></td><td>Estudo de expansão física em curso</td><td>Não anunciar antes de existir</td></tr>
+      <tr><td>Ancre OS<span class="s">camada de dados</span></td><td>O que permite acompanhar a jornada e provar a continuidade</td><td>Salesforce Health Cloud, Scheduler, Agentforce no WhatsApp, Marketing Cloud, prontuário com IA, Slack</td><td><span class="chip c-ok">no ar</span> <span class="chip c-warn">parcial</span></td><td>~R$ 30 mil/mês · LeadSource vazio em 8.651 oportunidades · origem da venda vazia em 83 de 142 alunos</td><td>Formulários e WhatsApps: caminho a verificar ponta a ponta</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Públicos como momentos de vida</h3>
+  <p>A Ancre não tem um público; tem momentos em que a mesma pessoa precisa de portas diferentes. Cada momento começa pelo desejo, pela dificuldade e pelo progresso que a pessoa busca.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Momento</th><th>Desejo</th><th>Dificuldade</th><th>Progresso que busca</th><th>Porta natural</th><th>Próxima porta que faz sentido</th></tr></thead>
+    <tbody>
+      <tr><td>"Algo não está bem"</td><td>Voltar a funcionar: dormir, trabalhar, conviver</td><td>Reconhecer que precisa de ajuda; medo do rótulo</td><td>Estabilizar e entender o que acontece</td><td>Clínica (psiquiatria, psicologia, neuro)</td><td>Gym, quando o médico vê que o corpo faz parte do tratamento</td></tr>
+      <tr><td>"Meu filho precisa de ajuda"</td><td>Ver o filho bem e saber o que fazer</td><td>Culpa, informação demais, agenda da família</td><td>Diagnóstico claro e um plano que a família consiga seguir</td><td>Kids</td><td>Clínica para os pais; Gym para quem cuida</td></tr>
+      <tr><td>"Quero preparar o corpo"</td><td>Energia, força, autonomia; fazer o esporte, viajar, acompanhar os netos</td><td>Nunca se adaptou à academia; insegurança; falta de tempo; dor</td><td>Sentir o corpo responder e ver isso em número</td><td>Checkup → Gym</td><td>Clínica (nutrição, cardio, reumato) quando o dado aponta</td></tr>
+      <tr><td>"O tratamento não funcionou"</td><td>Uma saída depois de tentativas</td><td>Cansaço, descrença, custo</td><td>Resposta ao tratamento com segurança</td><td>Essencial, por indicação</td><td>Acompanhamento na clínica e, quando couber, Gym</td></tr>
+      <tr><td>"Quero manter e pertencer"</td><td>Continuar bem, com gente parecida</td><td>Rotina que escorrega; cuidado que vira obrigação</td><td>Constância sem esforço de vontade</td><td>Comunidade</td><td>Reavaliações, planos longos, experiências</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><b>O que o formulário da Gym já diz.</b> Quem chega marca motivação (emagrecimento, performance, reabilitação, dor crônica, saúde mental, qualidade de vida), prazo esperado e quanto já investe em saúde por mês (até R$ 800 a acima de R$ 2.401). Esses três campos são a base da segmentação. Falta cruzá-los com conversão.</div>
+</section>
+
+<section id="posicionamento">
+  <span class="eyebrow">2 · Posicionamento</span>
+  <h2>Como apresentar a Ancre como conjunto e explicar cada frente</h2>
+  <div class="cols">
+    <div class="card navy"><span class="k">Ideia-mãe</span><p class="q" style="font-size:24px">Saúde com continuidade.</p><p class="s">A Ancre acompanha a pessoa ao longo da vida, com gente e com dado. Consulta, treino e procedimento são capítulos; a relação é o produto.</p></div>
+    <div class="card"><span class="k">Assinatura (manter)</span><p class="q" style="font-size:24px">Faz bem pra vida.</p><p class="s">Tem 8 anos, está nos três perfis e no YouTube. É da casa. Fica como assinatura de marca.</p></div>
+    <div class="card coral"><span class="k">Mote de campanha (novo)</span><p class="q" style="font-size:20px">Você está cuidando da sua saúde. Mas está preparando seu corpo para a vida que quer viver?</p><p class="s">A pergunta da Fer. Abre a conversa do Checkup e liga clínica e Gym sem citar diagnóstico.</p></div>
+  </div>
+
+  <h3>Arquitetura de marca</h3>
+  <p>Uma marca-mãe e portas com descritor. "Ancre" vem sempre primeiro na comunicação, mesmo onde o nome legal é "Clínica Ancre". Na imprensa já aparece "Ancre Health Group"; em português e para o paciente, basta <strong>Ancre</strong>.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Frente</th><th>Como se apresenta em uma linha</th><th>O que promete</th><th>O que prova</th><th>O que evita dizer</th></tr></thead>
+    <tbody>
+      <tr><td>Ancre</td><td>Saúde com continuidade, em Florianópolis.</td><td>Alguém vai acompanhar você, e vai ter dado para mostrar o caminho.</td><td>8 anos, 23 profissionais, 2 mil pacientes por ano, uma academia no mesmo prédio, prontuário único</td><td>"Ecossistema", "integral", "humanizado" (todo mundo diz)</td></tr>
+      <tr><td>Clínica Ancre</td><td>Médicos e psicólogos que não desistem de você.</td><td>Diagnóstico sério, sem pressa, sem rótulo</td><td>Google 5,0, a frase da casa ("não desistir de nenhum paciente"), médico explicando em vídeo</td><td>Listas de transtornos como vitrine</td></tr>
+      <tr><td>Ancre Kids</td><td>Para entender o seu filho, e ajudar você a ajudar.</td><td>Um plano que a família consegue seguir</td><td>Equipe de infância e adolescência, espaço feito para criança</td><td>Tom de alerta, medicalização precoce</td></tr>
+      <tr><td>Ancre Gym</td><td>Treino com horário marcado, dois alunos por professor, e um número para cada avanço.</td><td>Segurança, atenção e constância para quem não se adaptou à academia</td><td>5,0 em 54 avaliações, Checkup, aparelho que ajusta a carga ao corpo</td><td>"Biostrength", "IA", "Technogym" como manchete; a tecnologia aparece pelo que faz pela pessoa</td></tr>
+      <tr><td>Checkup</td><td>Em uma hora, o que o seu corpo consegue hoje e o que precisa desenvolver.</td><td>Clareza para decidir o que fazer</td><td>40 indicadores, relatório na hora, idade biológica</td><td>Prometer resultado ("30% a mais") sem fonte</td></tr>
+      <tr><td>Ancre Essencial</td><td>Quando o tratamento convencional não bastou, há caminhos com acompanhamento médico.</td><td>Segurança e critério</td><td>Médica responsável, protocolo, acompanhamento</td><td>Preço, promoção, "antes e depois". Publicidade médica segue o CFM</td></tr>
+      <tr><td>Comunidade Ancre</td><td>Gente que cuida de si, junta.</td><td>Pertencer sem obrigação</td><td>Só existe quando houver o primeiro encontro</td><td>Anunciar antes de existir</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Como falar de saúde mental e exercício sem estigma</h3>
+  <ul>
+    <li>Falar de capacidade, nunca de diagnóstico: "dormir melhor", "ter energia à tarde", "subir a escada sem parar". O diagnóstico fica na consulta.</li>
+    <li>O médico aparece como quem explica, não como quem rotula. O formato que mais engajou nos dois perfis é exatamente esse: cardiologista falando de dor no peito no treino, reumatologista investigando dor.</li>
+    <li>Exercício é tratamento quando o médico diz que é. Por isso a ponte clínica → Gym é um pedido médico, não um anúncio.</li>
+    <li>A Gym fala para quem "nunca se adaptou". Esse recorte acolhe quem chega pela saúde mental sem nomear.</li>
+  </ul>
+
+  <h3>Voz</h3>
+  <div class="voice">
+    <div class="card"><h4>Direta</h4><p>Frase curta, verbo na frente. "Agende a avaliação." Nada de "venha viver uma experiência".</p></div>
+    <div class="card"><h4>Humana</h4><p>Gente falando com gente. O post com mais comentários da Gym foi sobre uma aluna real; o da clínica, sobre a chegada de uma médica.</p></div>
+    <div class="card"><h4>Inteligente</h4><p>Explica o mecanismo: por que a frequência cardíaca em repouso cai com treino. Trata o leitor como adulto.</p></div>
+    <div class="card"><h4>Provocativa</h4><p>Faz a pergunta que a pessoa evita. "Em dez anos, o que você quer conseguir fazer?" Sem susto, com honestidade.</p></div>
+  </div>
+  <div class="cols">
+    <div class="card"><span class="k">Usar</span><p>cuidar · acompanhar · preparar · conseguir · capacidade · constância · o seu corpo · a sua vida · hoje e daqui a dez anos · médico explica · número</p></div>
+    <div class="card"><span class="k">Evitar</span><p>humanizado · integral · holístico · ecossistema (para o paciente) · experiência única · transforme sua vida · tecnologia de ponta · elite · exclusivo (a Gym já usa; trocar por "poucos por vez") · listas de transtornos</p></div>
+  </div>
+</section>
+
+<section id="jornadas">
+  <span class="eyebrow">3 · Jornadas</span>
+  <h2>Entrada, descoberta, atendimento, conversão e acompanhamento</h2>
+  <p>Quatro jornadas, uma por porta. Cada célula diz o que acontece hoje; as tracejadas em coral são onde a jornada se perde. A última coluna é a que transforma episódio em continuidade, e é a que menos existe.</p>
+  <div class="legend"><span class="chip c-cor">tracejado = lacuna</span></div>
+  <div class="jourwrap"><div class="jour">
+    <div class="row head"><div></div><div>Entrada</div><div>Descoberta</div><div>Atendimento</div><div>Conversão</div><div>Acompanhamento</div></div>
+    <div class="row"><div>Adulto<br><small>consulta</small></div><div>Google por especialidade, Instagram, indicação<small>origem não registrada</small></div><div>Site de especialidades + perfil do médico em vídeo</div><div>WhatsApp (Agentforce) → agenda<small>50,6% de conversão por conversa</small></div><div>Primeira consulta<small>+40% jul→ago</small></div><div class="gap">Retorno depende do paciente lembrar<small>26% de cancelamento; 1,5% chegam à Gym</small></div></div>
+    <div class="row"><div>Família<br><small>Kids</small></div><div>Pediatra, escola, pais que já são pacientes<small>sem rastreio</small></div><div class="gap">Instagram com 186 seguidores; sem página</div><div>WhatsApp da clínica<small>mesmo número; fila única a verificar</small></div><div>Consulta</div><div class="gap">Pais não são convidados para a própria porta</div></div>
+    <div class="row"><div>Corpo<br><small>Checkup → Gym</small></div><div>Tráfego pago, indicação de aluno, matéria na imprensa<small>origem em 71 de 142</small></div><div>Site da Gym (invisível ao Google por noindex), YouTube, Instagram</div><div>Formulário de 3 etapas com motivação e faixa de investimento → WhatsApp</div><div>Aula experimental R$ 200 ou Checkup R$ 350 → plano<small>Checkup caiu de 17 para 1/mês</small></div><div>Reavaliação prevista no plano; app Technogym<small>churn só começou a ser marcado em out</small></div></div>
+    <div class="row"><div>Tratamento<br><small>Essencial</small></div><div>Página de escetamina no site; indicação de psiquiatra</div><div class="gap">Sem explicação de critério, processo e segurança</div><div>Avaliação médica</div><div>Procedimento</div><div class="gap">Sem jornada de continuidade registrada</div></div>
+  </div></div>
+
+  <h3>Conexões que fazem sentido (e quem decide)</h3>
+  <div class="tw"><table>
+    <thead><tr><th>De</th><th>Para</th><th>Gatilho</th><th>Quem decide</th><th>Como o marketing ajuda</th></tr></thead>
+    <tbody>
+      <tr><td>Consulta (cardio, endócrino, reumato, psiquiatria, nutrição)</td><td>Checkup → Gym</td><td>Médico identifica que exercício faz parte do plano</td><td>Médico, com pedido de Checkup no prontuário</td><td>Material do pedido, página do Checkup, vaga reservada para paciente da clínica</td></tr>
+      <tr><td>Gym</td><td>Clínica</td><td>Checkup ou treino mostram dor, sono ruim, resultado que não vem, humor</td><td>Treinador sugere; profissional da clínica avalia</td><td>Protocolo de encaminhamento com dado do Checkup anexado</td></tr>
+      <tr><td>Kids</td><td>Clínica (pais) e Gym (quem cuida)</td><td>Família em acompanhamento; cuidador exausto</td><td>Profissional da Kids</td><td>Conteúdo para pais; convite, nunca venda</td></tr>
+      <tr><td>Clínica</td><td>Essencial</td><td>Resposta insuficiente ao tratamento convencional</td><td>Psiquiatra</td><td>Página que explica critério e segurança; nada de promoção</td></tr>
+      <tr><td>Qualquer porta</td><td>Comunidade</td><td>Pessoa em acompanhamento há mais de 6 meses</td><td>A pessoa</td><td>Primeiro encontro para quem já é da casa</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note c"><b>O que não fazemos.</b> Oferecer Gym a todo paciente. Vender Essencial como estética ou com preço em anúncio. Anunciar comunidade, recovery ou clube antes de existir. Usar o cadastro de uma frente para prospectar outra sem o profissional no meio.</div>
+</section>
+
+<!-- ═══════════════════ DESDOBRAMENTO ═══════════════════ -->
+<section id="presenca" class="part">
+  <span class="eyebrow">4 · Presença integrada</span>
+  <h2>Função de cada site, perfil, conteúdo, WhatsApp e CRM</h2>
+  <div class="tw"><table>
+    <thead><tr><th>Ativo</th><th>Função no ecossistema</th><th>Hoje</th><th>O que muda</th></tr></thead>
+    <tbody>
+      <tr><td>clinicaancre.com.br</td><td>Porta institucional da Ancre e das especialidades. É o site que o Google já conhece</td><td>WordPress, atualizado em out/26. Links mortos (Blog, FAQ, História), "Edit Template" vazando, dois WhatsApps, avaliações em imagem. Fala "saúde mental"; a bio do Instagram já fala "prevenção e longevidade"</td><td>Vira o site da Ancre: home com as portas, páginas de especialidade mantidas, Kids e Essencial ganham página, Gym linkada. Blog com os vídeos dos médicos transcritos. Um WhatsApp. Avaliações em texto</td></tr>
+      <tr><td>ancregym.com.br</td><td>Página de produto da Gym e do Checkup</td><td>Astro, bonito, formulário bom. <strong>noindex, nofollow</strong> na home e no Checkup: o Google não pode indexar. Sem preço, sem agendamento</td><td>Remover o noindex esta semana. Checkup com preço, agenda e o mote da campanha. Depoimentos reais ganham nome e número</td></tr>
+      <tr><td>Instagram @clinicaancre<span class="s">4.834</span></td><td>Médico explica. Autoridade e porta para consulta</td><td>2–3 posts/semana. Vídeo com médico: 400–760 views, até 24 comentários. Carrossel institucional: 6–40 likes</td><td>Linha fixa "Ancre explica": um médico, um sintoma, uma decisão. Carrossel institucional sai. Cada vídeo reaproveitado na Gym e no blog</td></tr>
+      <tr><td>Instagram @ancregym<span class="s">2.595</span></td><td>Gente real treinando, e o Checkup</td><td>Metade dos posts é texto motivacional (4–16 likes). Histórias de aluno e vídeos de médico: 70–86 likes, 1,6–1,8 mil plays</td><td>Para de motivar, passa a mostrar. Aluno real, número do Checkup, médico da Ancre falando de corpo. Série "em dez anos, o que você quer conseguir fazer?"</td></tr>
+      <tr><td>Instagram @ancrekids<span class="s">186</span></td><td>Pais entendem o filho</td><td>Quase parado</td><td>Entra na mesma linha editorial, com profissional da Kids. Meta modesta: 1 post por semana que responda uma dúvida de pai</td></tr>
+      <tr><td>YouTube</td><td>Acervo: Checkup explicado, médicos</td><td>Dois canais (clínica antigo, @ancregym ativo)</td><td>Um canal Ancre. Vídeos longos viram cortes para os três perfis</td></tr>
+      <tr><td>LinkedIn</td><td>Marca da Fer e da Dra. Júlia; recrutamento; parceiros corporativos</td><td>Página com 76 seguidores e categoria errada</td><td>Corrigir categoria. Conteúdo vem da marca pessoal da Fer (skill própria)</td></tr>
+      <tr><td>WhatsApp</td><td>A porta de verdade. Onde a conversão acontece</td><td>Três números (clínica 99191-7883 e 98833-7883, Gym 91733-3778). Agentforce no primeiro atendimento. Caminho de cada número até o Salesforce a verificar</td><td>Um número por porta, todos no Omni-Channel, LeadSource preenchido na primeira mensagem. Script do atendente com a próxima porta quando couber</td></tr>
+      <tr><td>Salesforce</td><td>A memória da jornada. É o que prova a continuidade</td><td>Tipos de registro por frente já existem. LeadSource vazio. Origem da venda da Gym vazia em 83 de 142. Status de plano só desde out</td><td>Origem obrigatória em toda oportunidade. UTM do formulário cai no lead. Relatório "pessoas em mais de uma frente"</td></tr>
+      <tr><td>Google Perfil da Empresa</td><td>Prova social local. Decide a escolha de quem pesquisa</td><td>Clínica 5,0 (33) · Gym 5,0 (54) · Kids 5,0 (poucas)</td><td>Pedido de avaliação no pós-consulta, como a Gym já faz. Meta: clínica com 80 até fevereiro</td></tr>
+      <tr><td>Mídia paga</td><td>Acelera o que já converte</td><td>R$ 6–8 mil/mês na Gym. Contribuição por canal não consolidada</td><td>Só sobe depois do rastreio. Campanha do Checkup com o mote; Search para especialidades da clínica</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><b>Um domínio para a Ancre.</b> Vale avaliar um domínio-mãe (ancre.com.br ou similar) que apresente as portas e aponte para os sites atuais, sem migração. Decisão da Fer com a Stoot; não é condição para os 90 dias.</div>
+</section>
+
+<section id="plano">
+  <span class="eyebrow">5 · Plano de 90 dias</span>
+  <h2>Prioridades, responsáveis, orçamento, indicadores e dependências</h2>
+  <p>A ordem segue capacidade, demanda, margem e gargalo. Primeiro o que destrava medição e indexação (custo zero, alto impacto). Depois o encaminhamento interno, que é o canal mais barato da Ancre. Mídia só cresce quando dá para ver o que ela traz.</p>
+  <div class="cols">
+    <div class="card navy"><span class="k">Metas em 90 dias</span><ul style="font-size:14px"><li>Gym: 60 alunos ativos (de 47)</li><li>Checkup: 20 por mês, metade pedidos por médico</li><li>Pacientes da clínica que fizeram Checkup: 30</li><li>Origem registrada em 90% das oportunidades novas</li><li>Cancelamento da clínica abaixo de 20%</li><li>Avaliações Google da clínica: 60</li></ul></div>
+    <div class="card"><span class="k">Orçamento de mídia</span><p class="big">R$ 8 mil/mês</p><p class="s">Mantém o patamar atual. 60% Checkup e Gym · 25% Search para especialidades da clínica · 15% teste. Sobe em janeiro se o rastreio mostrar CAC por canal.</p></div>
+    <div class="card"><span class="k">Quem faz</span><p class="s"><strong>Fer</strong> direção e decisões · <strong>Stoot</strong> conteúdo, sites, mídia, CRM · <strong>Dra. Júlia</strong> protocolo médico · <strong>Henrique</strong> Checkup e Gym · <strong>Recepção</strong> WhatsApp, avaliações, confirmação · <strong>João (Stoot)</strong> Salesforce</p></div>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th>Semanas</th><th>Iniciativa</th><th>Responsável</th><th>Depende de</th><th>Indicador</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="4" class="m">1–2<span class="s">destravar</span></td><td>Remover noindex do site da Gym; corrigir links mortos, "Edit Template" e WhatsApp duplicado no site da clínica</td><td>Stoot</td><td>—</td><td>Gym indexada no Google; zero links mortos</td></tr>
+      <tr><td>Rastreio de origem: LeadSource obrigatório no WhatsApp e no formulário; Origem da venda obrigatória na Gym; UTM do formulário no lead</td><td>João · recepção</td><td>Mapear caminho real de cada número e formulário até o Salesforce</td><td>Origem preenchida em 90% das novas</td></tr>
+      <tr><td>Checkup ganha preço, página com agendamento e vaga semanal reservada para paciente da clínica</td><td>Henrique · Stoot</td><td>Decisão de preço (Fer)</td><td>Página no ar; agenda aberta</td></tr>
+      <tr><td>Decisão de nomenclatura e assinatura (seção 2)</td><td>Fer · Júlia</td><td>—</td><td>Decidido</td></tr>
+      <tr><td rowspan="3" class="m">3–4<span class="s">fundação</span></td><td>Protocolo de pedido de Checkup pelos médicos: quando pedir, como registrar, o que o paciente recebe. Começa por cardio, reumato, endócrino, nutrição e psiquiatria</td><td>Júlia · Henrique</td><td>Checkup com agenda</td><td>Pedidos por médico por semana</td></tr>
+      <tr><td>Pedido de avaliação Google no pós-consulta (link no WhatsApp, 24 h depois)</td><td>Recepção · Marketing Cloud</td><td>—</td><td>Avaliações por semana</td></tr>
+      <tr><td>Linha editorial única "Ancre explica" nos três perfis; carrossel institucional e texto motivacional saem</td><td>Stoot</td><td>Agenda de gravação com médicos</td><td>Views e comentários por post; plays por vídeo</td></tr>
+      <tr><td rowspan="4" class="m">5–8<span class="s">velocidade</span></td><td>Campanha do Checkup com o mote, no Instagram e Meta Ads, para 35–65 em Florianópolis. Landing é a página do Checkup</td><td>Stoot</td><td>Rastreio no ar</td><td>Custo por Checkup agendado; Checkups/mês</td></tr>
+      <tr><td>Search para especialidades da clínica (neurologista, reumatologista, psiquiatra + Florianópolis), páginas existentes como destino</td><td>Stoot</td><td>Site corrigido</td><td>Custo por conversa; primeiras consultas</td></tr>
+      <tr><td>Confirmação e lembrete de consulta por WhatsApp com reagendamento em um toque; lista de espera para segunda e sexta</td><td>Recepção · Marketing Cloud</td><td>Jornada no Marketing Cloud</td><td>Cancelamento mensal; ocupação seg/sex</td></tr>
+      <tr><td>Kids ganha página no site da Ancre e volta a postar com profissional</td><td>Stoot · equipe Kids</td><td>Site da clínica</td><td>Consultas Kids por mês (separar no Salesforce)</td></tr>
+      <tr><td rowspan="3" class="m">9–12<span class="s">compor</span></td><td>Primeiro encontro da Comunidade: experiência aberta para quem é da casa (treino ou caminhada na Beira-Mar + conversa com um médico). Mede presença e pedidos de repetição</td><td>Henrique · Fer</td><td>Pelo menos 60 alunos ativos</td><td>Presentes; quem voltou ou pediu o próximo</td></tr>
+      <tr><td>Página do Essencial explicando critério, processo e segurança, revisada contra as regras de publicidade médica</td><td>Júlia · Stoot</td><td>Parecer sobre o que pode ser dito</td><td>Indicações internas registradas</td></tr>
+      <tr><td>Relatório "pessoas em mais de uma frente" no Salesforce e revisão do plano para o ciclo seguinte</td><td>João · Fer</td><td>Origem e status preenchidos</td><td>% de pacientes em 2+ frentes</td></tr>
+    </tbody>
+  </table></div>
+  <div class="cols">
+    <div class="card"><span class="k">Fora dos 90 dias, de propósito</span><p class="s">Expansão física, recovery, massagem, clube de membros, portal do paciente, Data Cloud, novo domínio, rebrand visual. Entram como contexto; não entram como promessa.</p></div>
+    <div class="card"><span class="k">Capacidade: o limite real da Gym</span><p class="s">1 professor para 2 alunos. 60 alunos em 8 aulas por mês são 480 aulas, 240 horas de professor. Antes de passar de 60, a conta é de equipe e horário de pico, não de marketing.</p></div>
+    <div class="card"><span class="k">Risco</span><p class="s">Médico não pedir o Checkup. Mitigação: começar com os cinco que já falam de exercício no Instagram, mostrar o dado de volta em 30 dias, e a Dra. Júlia liderar pelo exemplo.</p></div>
+  </div>
+</section>
+
+<section id="painel">
+  <span class="eyebrow">6 · Painel de acompanhamento</span>
+  <h2>Aquisição, conversão, ocupação, permanência, receita e margem</h2>
+  <p>O que já dá para ler hoje, com a fonte, e o que precisa ser instrumentado antes de aparecer. Valores de referência de set/out 2026.</p>
+  <div class="kpis">
+    <div class="kpi"><span class="k">Faturamento clínica (set)</span><span class="v">R$ 347 mil</span><span class="src">Salesforce · consultas</span></div>
+    <div class="kpi"><span class="k">Receita Gym (set)</span><span class="v">R$ 77 mil</span><span class="src">Salesforce · planos + mensal + checkup</span></div>
+    <div class="kpi"><span class="k">Alunos ativos</span><span class="v">46–48</span><span class="src">Fer · status no SF desde out</span></div>
+    <div class="kpi"><span class="k">Checkups (out)</span><span class="v">1</span><span class="src">Salesforce</span></div>
+    <div class="kpi"><span class="k">Em mais de uma frente</span><span class="v">32</span><span class="src">Salesforce · cruzamento</span></div>
+    <div class="kpi"><span class="k">Ocupação das salas</span><span class="v">32%</span><span class="src">agenda · jul–set</span></div>
+    <div class="kpi"><span class="k">Cancelamento clínica</span><span class="v">25,8%</span><span class="src">agenda · jan–set</span></div>
+    <div class="kpi"><span class="k">Conversão por conversa</span><span class="v">50,6%</span><span class="src">WhatsApp · ago</span></div>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th>Etapa</th><th>Indicador</th><th>Hoje</th><th>Fonte</th><th>Estado</th></tr></thead>
+    <tbody>
+      <tr><td>Aquisição</td><td>Leads por porta e por origem; custo por lead por canal</td><td>Não existe por origem</td><td>Salesforce LeadSource + UTM + Meta Ads</td><td><span class="chip c-warn">instrumentar</span></td></tr>
+      <tr><td>Aquisição</td><td>Avaliações Google por frente</td><td>33 · 54 · poucas</td><td>Google Perfil da Empresa</td><td><span class="chip c-ok">disponível</span></td></tr>
+      <tr><td>Conversão</td><td>Conversa → consulta; formulário → aula experimental → plano; Checkup → plano</td><td>50,6% (conversa); Checkup → plano não medido</td><td>Salesforce</td><td><span class="chip c-warn">parcial</span></td></tr>
+      <tr><td>Ocupação</td><td>Salas por dia e hora; alunos por horário vs. capacidade 1:2</td><td>32% salas; Gym por horário não medido</td><td>Agenda SF · Mywellness</td><td><span class="chip c-warn">parcial</span></td></tr>
+      <tr><td>Permanência</td><td>Retorno em 90 dias; renovação de plano; churn mensal; frequência às aulas</td><td>Status de plano desde out; frequência no Mywellness (extração manual)</td><td>Salesforce · Mywellness</td><td><span class="chip c-warn">instrumentar</span></td></tr>
+      <tr><td>Continuidade</td><td>Pessoas em 2+ frentes; Checkups pedidos por médico; tempo médio de relação</td><td>32 pessoas; pedidos: zero (não existe o fluxo)</td><td>Salesforce</td><td><span class="chip c-warn">instrumentar</span></td></tr>
+      <tr><td>Receita</td><td>Por frente, por profissional, por tipo de plano</td><td>Disponível mês a mês</td><td>Salesforce · painel Crescimento</td><td><span class="chip c-ok">disponível</span></td></tr>
+      <tr><td>Margem</td><td>Margem por frente; custo de plataforma por paciente ativo; CAC por canal</td><td>R$ 30 mil/mês de Salesforce; CAC desconhecido</td><td>Conta Azul · Salesforce · Meta Ads</td><td><span class="chip c-warn">instrumentar</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><b>Próximo passo do painel.</b> Quando origem e status estiverem preenchidos (semanas 1–4), este painel vira uma página viva lendo o Salesforce, no mesmo padrão do "Crescimento Ancre 2026". Até lá, a leitura mensal é manual.</div>
+</section>
+
+<section id="decisoes">
+  <span class="eyebrow">Decisões em aberto</span>
+  <h2>O que só a Fer e as sócias decidem</h2>
+  <ol class="steps">
+    <li><b>Nome e assinatura.</b>"Ancre" como marca-mãe com descritores; "Faz bem pra vida" como assinatura; a pergunta como mote. Sim ou ajustes?</li>
+    <li><b>Preço e papel do Checkup.</b>Produto de entrada com preço público, ou cortesia para paciente encaminhado? A proposta é preço público e vaga reservada para quem vem da clínica.</li>
+    <li><b>Teto da Gym.</b>50 é a meta próxima. Qual é o número em que a experiência de dois alunos por professor começa a pedir mais equipe ou mais espaço? Isso define quando a expansão vira plano.</li>
+    <li><b>Essencial.</b>O que pode ser dito publicamente sobre escetamina e injetáveis dentro das regras de publicidade médica. Precisa de parecer antes da página.</li>
+    <li><b>Mídia.</b>Manter R$ 8 mil até o rastreio mostrar CAC por canal, e aí decidir o patamar de 2027.</li>
+    <li><b>Kids no Salesforce.</b>Separar as consultas da Kids por tipo de registro para que a frente apareça nos números.</li>
+    <li><b>Domínio-mãe.</b>Avaliar ancre.com.br ou equivalente como porta das portas.</li>
+  </ol>
+</section>
+
+<footer>
+  <span>Ancre Health Group · Ecossistema Ancre v1 · 27/10/2026 · uso interno</span>
+  <span>Fontes: Salesforce (oportunidades, tipos de registro, status de plano), painéis "Crescimento Ancre 2026" e "Ocupação e valor das salas", sites e perfis públicos, brief da Fer de 27/10. Números da Gym conferidos com a referência de 46–48 alunos ativos.</span>
+</footer>
+</div>
